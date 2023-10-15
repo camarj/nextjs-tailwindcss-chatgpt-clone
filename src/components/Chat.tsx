@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FiSend } from "react-icons/fi";
 import { BsChevronDown, BsPlusLg } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
-import useAnalytics from "@/hooks/useAnalytics";
+// import useAnalytics from "@/hooks/useAnalytics";
 import useAutoResizeTextArea from "@/hooks/useAutoResizeTextArea";
 import Message from "./Message";
 import { DEFAULT_OPENAI_MODEL } from "@/shared/Constants";
@@ -15,7 +15,7 @@ const Chat = (props: any) => {
   const [showEmptyChat, setShowEmptyChat] = useState(true);
   const [conversation, setConversation] = useState<any[]>([]);
   const [message, setMessage] = useState("");
-  const { trackEvent } = useAnalytics();
+  // const { trackEvent } = useAnalytics();
   const textAreaRef = useAutoResizeTextArea();
   const bottomOfChatRef = useRef<HTMLDivElement>(null);
 
@@ -39,14 +39,14 @@ const Chat = (props: any) => {
 
     // Don't send empty messages
     if (message.length < 1) {
-      setErrorMessage("Please enter a message.");
+      setErrorMessage("Por favor ingresa un mensaje");
       return;
     } else {
       setErrorMessage("");
     }
 
-    trackEvent("send.message", { message: message });
-    setIsLoading(true);
+    // trackEvent("send.message", { message: message });
+    // setIsLoading(true);
 
     // Add the message to the conversation
     setConversation([
@@ -105,18 +105,18 @@ const Chat = (props: any) => {
   return (
     <div className="flex max-w-full flex-1 flex-col">
       <div className="sticky top-0 z-10 flex items-center border-b border-white/20 bg-gray-800 pl-1 pt-1 text-gray-200 sm:pl-3 md:hidden">
-        <button
+        {/* <button
           type="button"
           className="-ml-0.5 -mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white dark:hover:text-white"
           onClick={toggleComponentVisibility}
         >
-          <span className="sr-only">Open sidebar</span>
+          <span className="sr-only">Abrir Sidebar</span>
           <RxHamburgerMenu className="h-6 w-6 text-white" />
-        </button>
-        <h1 className="flex-1 text-center text-base font-normal">New chat</h1>
-        <button type="button" className="px-3">
+        </button> */}
+        <h1 className="flex-1 text-center text-base font-normal">Nuevo Chat</h1>
+        {/* <button type="button" className="px-3">
           <BsPlusLg className="h-6 w-6" />
-        </button>
+        </button> */}
       </div>
       <div className="relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1">
         <div className="flex-1 overflow-hidden">
@@ -125,7 +125,7 @@ const Chat = (props: any) => {
               {!showEmptyChat && conversation.length > 0 ? (
                 <div className="flex flex-col items-center text-sm bg-gray-800">
                   <div className="flex w-full items-center justify-center gap-1 border-b border-black/10 bg-gray-50 p-3 text-gray-500 dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-300">
-                    Model: {selectedModel.name}
+                    Modelo: {selectedModel.name}
                   </div>
                   {conversation.map((message, index) => (
                     <Message key={index} message={message} />
@@ -152,7 +152,7 @@ const Chat = (props: any) => {
                           id="headlessui-listbox-label-:r1:"
                           data-headlessui-state=""
                         >
-                          Model
+                          Modelo
                         </label>
                         <span className="inline-flex w-full truncate">
                           <span className="flex h-6 items-center gap-1 truncate text-white">
@@ -166,7 +166,7 @@ const Chat = (props: any) => {
                     </div>
                   </div>
                   <h1 className="text-2xl sm:text-4xl font-semibold text-center text-gray-200 dark:text-gray-600 flex gap-2 items-center justify-center h-screen">
-                    ChatGPT Clone
+                    Intellia Model 0.1.0
                   </h1>
                 </div>
               ) : null}
@@ -196,7 +196,7 @@ const Chat = (props: any) => {
                     overflowY: "hidden",
                   }}
                   // rows={1}
-                  placeholder="Send a message..."
+                  placeholder="Enviar mensage..."
                   className="m-0 w-full resize-none border-0 bg-transparent p-0 pr-7 focus:ring-0 focus-visible:ring-0 dark:bg-transparent pl-2 md:pl-0"
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={handleKeypress}
@@ -213,8 +213,7 @@ const Chat = (props: any) => {
           </form>
           <div className="px-3 pt-2 pb-3 text-center text-xs text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
             <span>
-              ChatGPT Clone may produce inaccurate information about people,
-              places, or facts.
+              Este modelo de intellia puede presentar información inexacta sobre personas, lugares o hechos
             </span>
           </div>
         </div>
